@@ -1,17 +1,14 @@
 #!/bin/bash
 set -e
 
-# Check if correct number of arguments are provided
 if [ "$#" -ne 2 ]; then
     echo "Usage: $0 <name> <email>"
     exit 1
 fi
 
-# Assign arguments to variables
 GIT_NAME="$1"
 GIT_EMAIL="$2"
 
-# Set up Git identity
 echo "Setting up Git identity..."
 git config --global user.name "$GIT_NAME"
 git config --global user.email "$GIT_EMAIL"
