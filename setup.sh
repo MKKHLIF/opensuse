@@ -32,9 +32,9 @@ sudo ./scripts/flathub.sh
 echo "Updating system repositories and packages..."
 zypper refresh && zypper update -y
 
-./scripts/packages.sh
-./scripts/git.sh "$git_name" "$git_email"
-./scripts/dotfiles.sh
+sudo ./scripts/packages.sh
+sudo ./scripts/git.sh "$git_name" "$git_email"
+sudo ./scripts/dotfiles.sh
 
 if [[ "$install_nvidia" == "y" ]]; then
     ./scripts/nvidia.sh
