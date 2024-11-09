@@ -5,48 +5,58 @@ print_message() {
     echo -e "\033[1;32m$1\033[0m"
 }
 
+# Check if the script is run as root
 if [[ $(id -u) -ne 0 ]]; then
     echo "This script must be run as root."
     exit 1
 fi
 
+# Update system repositories and packages
 print_message "Updating system repositories and packages..."
 zypper refresh && zypper update -y
 
-print_message "Adding NVIDIA repository..."
-zypper addrepo --refresh https://download.nvidia.com/opensuse/tumbleweed NVIDIA
+# Add NVIDIA repository if not already added
+if ! zypper repos | grep -q 'NVIDIA'; then
+    print_message "Adding NVIDIA repository..."
+    zypper addrepo --refresh https://download.nvidia.com/opensuse/tumbleweed NVIDIA
+else
+    print_message "NVIDIA repository already exists. Skipping addition."
+fi
 
+# Refresh repositories
 print_message "Refreshing repositories..."
 zypper refresh
 
-print_message "Installing NVIDIA proprietary driver..."
-zypper install -y nvidia-glG05 nvidia-utils nvidia-devel
+# Install NVIDIA driver and recommended packages automatically
+print_message "Installing NVIDIA driver and dependencies..."
+zypper install-new-recommends --repo NVIDIA
 
-# Install the NVIDIA kernel module (this is the module for the current running kernel)
-print_message "Installing NVIDIA kernel module..."
-zypper install -y kernel-default-devel
+# If using Optimus (hybrid graphics), install bumblebee
+print_message "Installing Optimus tools (bumblebee or nvidia-prime)..."
+zypper install -y bumblebee
 
-# Install the NVIDIA driver specific to your kernel version
-print_message "Installing kernel driver package..."
-zypper install -y nvidia-driver
-
-# Install optimus-manager or prime for hybrid graphics management (only for laptops with hybrid GPUs)
-print_message "Installing NVIDIA Optimus tools (bumblebee or nvidia-prime)..."
-zypper install -y bumblebee nvidia-prime
-
-# Ensure Bumblebee services are running (if using Bumblebee)
+# Enable Bumblebee services if using Bumblebee
 print_message "Enabling Bumblebee services..."
 systemctl enable bumblebeed
 systemctl start bumblebeed
 
-print_message "Disabling Nouveau driver (if necessary)..."
-cat <<EOF > /etc/modprobe.d/disable-nouveau.conf
+print_message "Disabling Nouveau driver..."
+# Check if the file already contains the necessary lines
+if ! grep -q 'blacklist nouveau' /etc/modprobe.d/disable-nouveau.conf; then
+    # If not, write the lines to disable Nouveau
+    cat <<EOF > /etc/modprobe.d/disable-nouveau.conf
 blacklist nouveau
 options nouveau modeset=0
 EOF
+    print_message "Nouveau driver has been disabled."
+else
+    print_message "Nouveau driver is already disabled."
+fi
 
-# Regenerate initramfs to ensure the changes take effect
+
+# Regenerate initramfs to apply changes
 print_message "Regenerating initramfs..."
-mkinitrd
+dracut --force
 
-print_message "Nvidia Installation complete!"
+# Final message
+print_message "NVIDIA installation complete!"
