@@ -26,8 +26,8 @@ read -p "Enter your Git email: " git_email
 
 echo -e "\e[0m"
 
-./scripts/opi.sh
-./scripts/flathub.sh
+sudo ./scripts/opi.sh
+sudo ./scripts/flathub.sh
 
 echo "Updating system repositories and packages..."
 zypper refresh && zypper update -y
