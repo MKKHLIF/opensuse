@@ -1,6 +1,5 @@
 neovim
 tmux
-vscode
 yarn
 docker
 docker-compose
