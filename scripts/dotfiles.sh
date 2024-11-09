@@ -1,26 +1,27 @@
 #!/bin/bash
 
-# Define variables
-DOTFILES_REPO="https://github.com/MKKHLIF/.dotfiles.git" 
+DOTFILES_REPO="git@github.com:MKKHLIF/.dotfiles.git"
 DOTFILES_DIR="$HOME/.dotfiles"
-STOW_DIR="$DOTFILES_DIR"       
 
-# Clone the dotfiles repository if it doesn't exist
+handle_error() {
+    echo "Error: $1" >&2
+    exit 1
+}
+
 if [ ! -d "$DOTFILES_DIR" ]; then
-  echo "Cloning dotfiles repository..."
-  git clone "$DOTFILES_REPO" "$DOTFILES_DIR"
+    echo "Cloning dotfiles repository..."
+    git clone "$DOTFILES_REPO" "$DOTFILES_DIR" || handle_error "Failed to clone repository"
 else
-  echo "Dotfiles repository already exists at $DOTFILES_DIR"
+    echo "Dotfiles repository already exists!"
 fi
 
-cd "$DOTFILES_DIR" || exit 1
+cd "$DOTFILES_DIR" || handle_error "Failed to change to dotfiles directory"
 
-# Stow each subdirectory in the dotfiles repo (e.g., 'bash', 'vim', 'tmux', etc.)
 for dir in */; do
-  if [ -d "$dir" ]; then
-    echo "Creating symlinks for $dir..."
-    stow -v -d "$STOW_DIR" -t "$HOME" "$dir"
-  fi
+    if [ -d "$dir" ]; then
+        echo "Creating symlinks for $dir..."
+        stow "$dir" || handle_error "Failed to stow $dir"
+    fi
 done
 
-echo "Dotfiles setup complete."
+echo "Dotfiles setup complete!"
