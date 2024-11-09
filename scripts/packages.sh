@@ -59,7 +59,7 @@ echo -e "\nInstalling packages from official repositories..."
 if [ -s "$OFFICIAL_PACKAGES" ]; then
     echo "Official packages to install:"
     cat "$OFFICIAL_PACKAGES"
-    sudo zypper -y install $(cat "$OFFICIAL_PACKAGES")
+    sudo zypper install -y $(cat "$OFFICIAL_PACKAGES")
 fi
 
 echo -e "\nInstalling packages from OPI..."
