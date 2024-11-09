@@ -1,6 +1,7 @@
 hyprpaper
 waybar
 kitty
+nautilus
 wofi
 hyprlock
 hyprmocha
