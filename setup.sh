@@ -31,3 +31,10 @@ fi
 ./scripts/hyprland.sh
 
 echo -e "\e[1;32mSetup complete!\e[0m"
+
+# Red reboot prompt
+echo -e -n "\e[1;31mDo you want to reboot now? (y/N) \e[0m"
+read answer
+if [[ $answer =~ ^[Yy]$ ]]; then
+    sudo reboot
+fi
