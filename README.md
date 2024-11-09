@@ -10,7 +10,7 @@
   <img src="https://img.shields.io/github/license/raexera/yuki" alt="License Badge"  height="20"/>
 </p>
 
-<br>
+<hr>
 
 > [!NOTE]
 >
