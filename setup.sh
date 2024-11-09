@@ -1,6 +1,12 @@
 #!/bin/bash
 set -e
 
+if [[ $(id -u) -ne 0 ]]; then
+    echo "This script must be run as root."
+    exit 1
+fi
+
+
 echo -e "\e[1;32m"
 echo "  ____                   _____ _    _ _____ _____ "
 echo " / __ \                 / ____| |  | / ____|  ___|"
