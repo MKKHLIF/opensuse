@@ -1,3 +1,4 @@
+org.gimp.GIMP
 com.discordapp.Discord
 org.telegram.desktop
 com.brave.Browser
