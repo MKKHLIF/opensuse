@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ROOT_DIR="../packages"
+ROOT_DIR="$(dirname "$0")/../packages"
 
 # Validate root directory
 if [ ! -d "$ROOT_DIR" ]; then
