@@ -1,6 +1,11 @@
 git
 curl
+telnet
 vim
 htop
 neofetch
 stow
+zip
+unzip
+ntfs-3g
+codecs
