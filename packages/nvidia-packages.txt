@@ -1,2 +1,0 @@
-nvidia-glG04
-nvidia-computeG04

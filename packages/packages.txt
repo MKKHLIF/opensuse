@@ -3,3 +3,4 @@ curl
 vim
 htop
 neofetch
+stow

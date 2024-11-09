@@ -1,0 +1,5 @@
+neovim
+tmux
+yarn
+docker
+docker-compose

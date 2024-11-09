@@ -1,0 +1,10 @@
+hyprpaper
+waybar
+kitty
+wofi
+hyprlock
+hyprmocha
+starship
+nerd-fonts
+nwg-look
+catppuccin-gtk

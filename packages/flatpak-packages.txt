@@ -1,3 +1,4 @@
 com.discordapp.Discord
-org.gimp.GIMP
-org.videolan.VLC
+org.telegram.desktop
+com.brave.Browser
+com.visualstudio.code
