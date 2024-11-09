@@ -20,19 +20,22 @@ read -p "Enter your Git email: " git_email
 
 echo -e "\e[0m"
 
-./scripts/git.sh "$git_name" "$git_email"
+./scripts/opi.sh
+./scripts/flathub.sh
+
+echo "Updating system repositories and packages..."
+zypper refresh && zypper update -y
+
 ./scripts/packages.sh
-./scripts/obs.sh
+./scripts/git.sh "$git_name" "$git_email"
+./scripts/dotfiles.sh
+
 if [[ "$install_nvidia" == "y" ]]; then
     ./scripts/nvidia.sh
 fi
-./scripts/flathub.sh
-./scripts/dotfiles.sh
-./scripts/hyprland.sh
 
 echo -e "\e[1;32mSetup complete!\e[0m"
 
-# Red reboot prompt
 echo -e -n "\e[1;31mDo you want to reboot now? (y/N) \e[0m"
 read answer
 if [[ $answer =~ ^[Yy]$ ]]; then
