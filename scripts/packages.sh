@@ -82,3 +82,11 @@ fi
 rm -f "$OFFICIAL_PACKAGES" "$OPI_PACKAGES" "$FLATPAK_PACKAGES"
 
 echo -e "\nPackage installation complete!"
+
+echo -e "\nInstalling additional software..."
+
+# brave
+sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+sudo zypper addrepo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+sudo zypper install brave-browser
+

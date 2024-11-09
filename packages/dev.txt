@@ -1,7 +1,6 @@
 neovim
 tmux
 vscode
-jetbrains-toolbox
 yarn
 docker
 docker-compose
