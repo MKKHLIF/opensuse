@@ -1,5 +1,3 @@
-org.gimp.GIMP
-com.discordapp.Discord
+brave
+discord
 org.telegram.desktop
-com.brave.Browser
-com.visualstudio.code
