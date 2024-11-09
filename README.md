@@ -4,7 +4,27 @@
   </a>
 </p>
 
-# openSUSE Setup Tool
+<br>
+
+<p align="center">
+  <img src="https://img.shields.io/github/license/raexera/yuki" alt="License Badge"  height="20"/>
+</p>
+
+<br>
+
+> [!NOTE]
+>
+> **System Information:**
+>
+> - **OS:** openSUSE
+> - **Window Manager:** Hyprland
+> - **Shell:** ZSH
+> - **Terminal:** Kitty
+> - **Editor:** Neovim
+
+## About
 
 A collection of scripts to automate the setup of my personal openSUSE environment, customized for my hardware and preferences.
 It won't be compatible with your computer, but feel free to read it if you're interested! :)
+
+
